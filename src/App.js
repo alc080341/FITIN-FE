@@ -3,7 +3,10 @@ import "./App.css";
 import Program from "./components/Program";
 
 function App() {
-  const [workoutsData, updateWorkoutData] = useState([]);
+  const [workoutsData, updateWorkoutData] = useState({
+    workoutTitle: "none",
+    workouts: [],
+  });
   useEffect(() => {
     const url = "http://localhost:5275/FitnessProgram";
 
@@ -20,7 +23,7 @@ function App() {
       })
       .then((data) => {
         console.log("Data received:", data);
-       // updateWorkoutData(data);
+        updateWorkoutData(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -29,7 +32,16 @@ function App() {
 
   return (
     <div className="app">
-      <Program name="Fitness Routine" workouts={workoutsData} />
+      {workoutsData.workouts.length ? (
+        // Render this if data exists
+        <Program
+          title={workoutsData.programTitle}
+          workouts={workoutsData.workouts}
+        />
+      ) : (
+        // Render this if data does not exist
+        <div>No data available</div>
+      )}
     </div>
   );
 }

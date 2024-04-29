@@ -7,7 +7,7 @@ const Program = ({ name, workouts }) => {
       <h2>{name}</h2>
       <div className="workout-list">
         {workouts.map((workout, index) => (
-          <Workout key={index} name={workout.name} exercises={workout.exercises} />
+          <Workout key={index} title={workout.title} exercises={workout.exercises} />
         ))}
       </div>
     </div>
